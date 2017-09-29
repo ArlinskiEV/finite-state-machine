@@ -25,14 +25,14 @@ class FSM {
      */
     changeState(state) {
       //find state
-      if (this.config.states[state] != null) {
-        while (this.state != 0) {
-          this.states.shift();
-          this.state--;
-        }
-        this.states.unshift(state);
-      }
-      else throw Error;
+        if (this.config.states[state] != null) {
+          while (this.state != 0) {
+            this.states.shift();
+            this.state--;
+          }
+          this.states.unshift(state);
+        } else throw new Error ('Error');
+
     }
 
     /**
@@ -42,7 +42,7 @@ class FSM {
     trigger(event) {
       if (this.config.states[this.getState()].transitions[event] != null) {
         this.changeState(this.config.states[this.getState()].transitions[event]);
-      } else throw Error;
+      } else throw new Error ('Error');
     }
 
     /**
@@ -103,6 +103,7 @@ class FSM {
       this.states.unshift(temp);
       this.state = 0;
     }
+
 }
 
 module.exports = FSM;
