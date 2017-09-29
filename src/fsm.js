@@ -49,9 +49,8 @@ class FSM {
      * Resets FSM state to initial.
      */
     reset() {
-      this.config = config;
       this.states = [];
-      this.states.unshift(config.initial);
+      this.states.unshift(this.config.initial);
       this.state = 0;
     }
 
@@ -61,7 +60,15 @@ class FSM {
      * @param event
      * @returns {Array}
      */
-    getStates(event) {}
+    getStates(event) {
+      var result =[];
+      for (var st in this.config.states) {
+        if ((!event)||(this.config.states[st].transitions[event] != null)) {
+          result.push(st);
+        }
+      }
+      return result;
+    }
 
     /**
      * Goes back to previous state.
@@ -69,7 +76,7 @@ class FSM {
      * @returns {Boolean}
      */
     undo() {
-      if (this.state < this.states.length) {
+      if (this.state < this.states.length - 1) {
         this.state++;
         return true;
       }
