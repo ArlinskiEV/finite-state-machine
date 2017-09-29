@@ -32,7 +32,7 @@ class FSM {
         }
         this.states.unshift(state);
       }
-      else throw(Error);
+      else throw Error;
     }
 
     /**
@@ -40,9 +40,9 @@ class FSM {
      * @param event
      */
     trigger(event) {
-      if (this.config[this.getState()].transitions[event] != null) {
-        this.changeState(this.config[this.getState()].transitions[event]);
-      } else throw(Error);
+      if (this.config.states[this.getState()].transitions[event] != null) {
+        this.changeState(this.config.states[this.getState()].transitions[event]);
+      } else throw Error;
     }
 
     /**
